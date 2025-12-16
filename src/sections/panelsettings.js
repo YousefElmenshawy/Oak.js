@@ -30,11 +30,22 @@ class PanelSettings extends Component {
         const re = /^[0-9\b]+$/;
 
         if (event.target.value === "" || re.test(event.target.value)) {
-            this.props.setProjectSettings(
+            if(event.target.value<=16777216){ // added a saftey limit (16MB) to avoid browser Crashing
+            this.props.setProjectSettings( 
                 this.props.project_settings.file_name,
                 event.target.value,
                 this.props.project_settings.isa
             );
+        }
+            else
+            {
+            this.props.setProjectSettings(
+                this.props.project_settings.file_name,
+                16777216,
+                this.props.project_settings.isa
+            );
+
+            }
         }
     };
 
